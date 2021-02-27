@@ -1,0 +1,49 @@
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/app_toolbar"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:layout_below="@+id/tool_bar"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/the_red_cafe"
+            android:id="@+id/logo" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome\n Menu"
+            android:id="@+id/welcome_text"
+            android:layout_below="@+id/logo"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#7C1616"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycle_view"
+            android:layout_below="@+id/welcome_text"/>
+
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/recycle_view"-->
+<!--            android:text="LOG OUT"-->
+<!--            android:backgroundTint="#911717"-->
+<!--            android:id="@+id/button_logout"/>-->
+
+    </RelativeLayout>
+
+</RelativeLayout>

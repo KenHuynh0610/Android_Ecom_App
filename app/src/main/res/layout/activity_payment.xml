@@ -1,0 +1,159 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+ <include layout="@layout/app_toolbar"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:src="@drawable/the_red_cafe"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Order Summary:"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal:"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" $200"
+                android:textSize="20dp"
+                android:id="@+id/text_view_subtotal"
+                android:textColor="#BC2323"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of Items:"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 12"
+                android:textSize="20dp"
+                android:id="@+id/text_view_number_items"
+                android:textColor="#BC2323"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shipping Address:"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+        <RelativeLayout android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/address_layout"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1235, "
+                android:textSize="20dp"
+                android:id="@+id/text_view_houseNo"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abc street,"
+                android:textSize="20dp"
+                android:layout_toRightOf="@id/text_view_houseNo"
+                android:textColor="@color/black"
+                android:id="@+id/text_view_street"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Office"
+                android:textSize="20dp"
+                android:layout_toRightOf="@id/text_view_street"
+                android:textColor="@color/black"
+                android:id="@+id/text_view_type"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City, "
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/text_view_houseNo"
+                android:id="@+id/text_view_city"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="95959"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:id="@+id/text_view_zip"
+                android:layout_below="@id/text_view_street"
+                android:layout_toRightOf="@id/text_view_city"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How would you like to pay?"
+        android:textSize="25dp"
+        android:textColor="@color/black"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cash"
+        android:id="@+id/button_cash"
+        android:background="@drawable/select_button"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+
+        />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Card"
+        android:id="@+id/button_card"
+        android:backgroundTint="#AC2424"
+        android:layout_weight="1"
+        />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Order"
+        android:id="@+id/button_confirm"
+        />
+
+</LinearLayout>
+</LinearLayout>
