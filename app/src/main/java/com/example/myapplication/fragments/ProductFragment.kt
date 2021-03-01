@@ -27,6 +27,7 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_order.*
 import kotlinx.android.synthetic.main.activity_show_product.*
 import kotlinx.android.synthetic.main.fragment_product.view.*
+import kotlinx.android.synthetic.main.row_product_layout.view.*
 
 
 class ProductFragment : Fragment() {
@@ -51,47 +52,15 @@ class ProductFragment : Fragment() {
 
         var view =  inflater.inflate(R.layout.fragment_product, container, false)
         getProduct()
-        var dividerDec = DividerItemDecoration(activity!!, LinearLayout.VERTICAL)
-        var dbHelper = DBHelpers(activity!!)
 
+        var dbHelper = DBHelpers(activity!!)
+//  TODO: add the dynamic cart view to this fragment
 //        add_to_cart.setOnClickListener {
 //
-//            if (!dbHelper.exists(product.productName)) {
-//                dbHelper.addToCart(product)
-//                product.quantity++
-//                dbHelper.updateQuantity(product.productName, product.quantity)
-//                text_view_quantity.text = product.quantity.toString()
-//                selectQuantity(product.productName)
-//            }
-//        }
-//        button_increment.setOnClickListener {
-//            product.quantity = dbHelper.getQuantity(product.productName)
-//            if (dbHelper.exists(product.productName)) {
-//                product.quantity++
-//                dbHelper.updateQuantity(product.productName, product.quantity)
-//                text_view_quantity.text = product.quantity.toString()
-//                selectQuantity(product.productName)
-//                calculation(product)
-//            }
-//            else{
-//                dbHelper.addToCart(product)
-//            }
-//        }
-//        button_decrement.setOnClickListener {
-//            product.quantity = dbHelper.getQuantity(product.productName)
-//            if (dbHelper.exists(product.productName) && product.quantity>0) {
-//                product.quantity--
-//                dbHelper.updateQuantity(product.productName, product.quantity)
-//                text_view_quantity.text = product.quantity.toString()
-//                selectQuantity(product.productName)
-//                calculation(product)
-//            }
-//        }
 
-        productAdapter = ProductAdapter(requireActivity().applicationContext)
+        productAdapter = ProductAdapter(activity!!)
         view.product_recycle_view.adapter = productAdapter
         view.product_recycle_view.layoutManager = LinearLayoutManager(activity!!)
-        view.product_recycle_view.addItemDecoration(dividerDec)
         return view
     }
 

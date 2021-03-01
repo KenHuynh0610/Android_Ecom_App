@@ -22,7 +22,7 @@
             android:id="@+id/text_view_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#B31616"
+            android:textColor="#7B1D1D"
             android:textSize="25dp" />
 
 

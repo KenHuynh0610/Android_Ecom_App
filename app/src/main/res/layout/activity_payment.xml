@@ -35,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:text=" $200"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:id="@+id/text_view_subtotal"
-                android:textColor="#BC2323"/>
+                android:textColor="#363636"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -52,9 +53,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 12"
+                android:textStyle="bold"
                 android:textSize="20dp"
                 android:id="@+id/text_view_number_items"
-                android:textColor="#BC2323"/>
+                android:textColor="#2C2C2C"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -107,6 +109,15 @@
                 android:id="@+id/text_view_zip"
                 android:layout_below="@id/text_view_street"
                 android:layout_toRightOf="@id/text_view_city"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:text="Change"
+                android:id="@+id/change_button"
+                android:textSize="10dp"
+                android:textAllCaps="false"
+                android:backgroundTint="#842F2F"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -132,7 +143,7 @@
         android:layout_height="wrap_content"
         android:text="Cash"
         android:id="@+id/button_cash"
-        android:background="@drawable/select_button"
+        android:backgroundTint="#AC2424"
         android:layout_marginRight="10dp"
         android:layout_weight="1"
 
@@ -153,6 +164,8 @@
         android:layout_height="wrap_content"
         android:text="Confirm Order"
         android:id="@+id/button_confirm"
+        android:backgroundTint="#AC2424"
+        android:visibility="gone"
         />
 
 </LinearLayout>

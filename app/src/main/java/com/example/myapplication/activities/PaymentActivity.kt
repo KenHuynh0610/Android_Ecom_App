@@ -1,9 +1,11 @@
 package com.example.myapplication.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -40,21 +42,60 @@ class PaymentActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         var productSummary: ArrayList<ProductSummary> = ArrayList()
         var address = intent.getSerializableExtra(KEY_ADDRESS) as AddressData
-        var shippingAddress = ShippingAddress(address._id, address.city, address.houseNo, address.pincode, address.streetName, address.type)
+        lateinit var shippingAddress: ShippingAddress
+
+        change_button.setOnClickListener{
+            startActivity(Intent(this, AddressActivity::class.java))
+        }
+        if (address._id != null) {
+            shippingAddress = ShippingAddress(
+                address._id!!,
+                address.city,
+                address.houseNo,
+                address.pincode,
+                address.streetName,
+                address.type
+            )
+        }
         var product = db.getAllProduct()
 
-
+        text_view_city.text = address.city + ", "
+        text_view_houseNo.text = address.houseNo + ", "
+        text_view_street.text = address.streetName + ", "
+        text_view_zip.text = address.pincode.toString()
+        text_view_type.text = address.type
         //TODO: make swipe, change color button, delete button, add and minus buttons, show cart in every UI
 
-       var totalPrice = sessionManager.getPriceSummary()
+        var totalPrice = sessionManager.getPriceSummary()
         var totalMrp = sessionManager.getMRPSummary()
         var totalSave = sessionManager.getSaveSummary()
 
-        var orderSummary = OrderSummary(null,0, totalSave, totalPrice, totalPrice, totalMrp)
+        var orderSummary = OrderSummary(null, 0, totalSave, totalPrice, totalPrice, totalMrp)
 
+        text_view_number_items.text = "${ db.getNumberOfProducts().toString() }"
+        text_view_subtotal.text = "$${totalPrice.toString()}"
 
-        for(i in product) {
-            productSummary.add(ProductSummary(i.productId, i.image, i.mrp, i.price, i.name, i.quantity))
+        for (i in product) {
+            productSummary.add(
+                ProductSummary(
+                    i.productId,
+                    i.image,
+                    i.mrp,
+                    i.price,
+                    i.name,
+                    i.quantity
+                )
+            )
+        }
+
+        button_cash.setOnClickListener{
+            button_card.visibility = View.GONE
+            button_confirm.visibility = View.VISIBLE
+        }
+
+        button_card.setOnClickListener{
+            button_cash.visibility = View.GONE
+            button_confirm.visibility = View.VISIBLE
         }
 
         var userId = sessionManager.getUserId()
@@ -62,26 +103,39 @@ class PaymentActivity : AppCompatActivity() {
         var userName = sessionManager.getUserName()
         Log.d("abc", "$totalPrice,  $totalMrp, $totalSave}")
         var userInfo = UserInfo(userId, userEmail, userName)
-        var summary = OrderPost(null, null, null, orderSummary, productSummary, shippingAddress, userInfo, userId)
+        var summary = OrderPost(
+            null,
+            null,
+            null,
+            orderSummary,
+            productSummary,
+            shippingAddress,
+            userInfo,
+            userId
+        )
         var gson = Gson().toJson(summary, OrderPost::class.java)
         var params = JSONObject(gson)
 
-        var queue = Volley.newRequestQueue(this)
-        var response = JsonObjectRequest(
-            Request.Method.POST,
-            Endpoints.postOrder(),
-            params,
-            Response.Listener {
-                Toast.makeText(this, "Success!", Toast.LENGTH_LONG).show()
-            },
-            Response.ErrorListener {
-                Toast.makeText(this, "Failed!", Toast.LENGTH_LONG).show()
-                var error = String(it.networkResponse.data)
+        button_confirm.setOnClickListener {
+            var queue = Volley.newRequestQueue(this)
+            var response = JsonObjectRequest(
+                Request.Method.POST,
+                Endpoints.postOrder(),
+                params,
+                Response.Listener {
+                    Toast.makeText(this, "Success!", Toast.LENGTH_LONG).show()
+                    db.deleteAll()
+                    startActivity(Intent(this, ThankyouActivity::class.java))
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this, "Failed!", Toast.LENGTH_LONG).show()
+                    var error = String(it.networkResponse.data)
 
-            }
+                }
             )
-        queue.add(response)
+            queue.add(response)
 
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

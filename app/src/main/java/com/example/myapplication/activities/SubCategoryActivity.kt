@@ -7,7 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.android.volley.Request
 import com.android.volley.Response
@@ -15,7 +17,10 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.myapplication.R
 import com.example.myapplication.adapters.FragmentAdapter
+
+import com.example.myapplication.adapters.ProductAdapter
 import com.example.myapplication.app.Endpoints
+import com.example.myapplication.helpers.DBHelpers
 import com.example.myapplication.models.Category
 import com.example.myapplication.models.Data
 import com.example.myapplication.models.Data.Companion.KEY_CAT
@@ -26,11 +31,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_order.*
 import kotlinx.android.synthetic.main.activity_sub_category.*
 import kotlinx.android.synthetic.main.app_toolbar.*
+import kotlinx.android.synthetic.main.layout_cart.view.*
 
-class SubCategoryActivity : AppCompatActivity() {
+class SubCategoryActivity : AppCompatActivity(),
+    ProductAdapter.OnClickProductListener {
 
     var subCategory:ArrayList<SubCategory> = ArrayList()
     lateinit var fragmentAdapter:FragmentAdapter
+    var dbHelper = DBHelpers(this)
+    var textViewCartCount: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +51,6 @@ class SubCategoryActivity : AppCompatActivity() {
     private fun init() {
 
 
-
         var category = intent.getSerializableExtra(KEY_CAT) as Data
         setupToolbar(category)
         getSubData(category)
@@ -52,9 +60,15 @@ class SubCategoryActivity : AppCompatActivity() {
         tab_layout.setupWithViewPager(view_pager)
 
 
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        var item = menu?.findItem(R.id.menu_cart)
+        MenuItemCompat.setActionView(item, R.layout.layout_cart)
+        var view = MenuItemCompat.getActionView(item)
+        textViewCartCount = view.text_view_cart_count
+        updateCart()
         return true
     }
 
@@ -98,5 +112,27 @@ class SubCategoryActivity : AppCompatActivity() {
         requestQueue.add(request)
     }
 
+    private fun updateCart(){
+            var count = dbHelper.getNumberOfProducts()
 
+            if(count == 0){
+                textViewCartCount?.visibility = View.GONE
+            }
+            else{
+                textViewCartCount?.visibility = View.VISIBLE
+                textViewCartCount?.text = count.toString()
+
+            }
+        textViewCartCount?.setOnClickListener{
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
+        }
+
+    override fun onClick() {
+        updateCart()
+    }
 }
+
+
+

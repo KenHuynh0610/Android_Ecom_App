@@ -21,20 +21,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome\n Menu"
+            android:text="Menu"
             android:id="@+id/welcome_text"
             android:layout_below="@+id/logo"
             android:textSize="30dp"
             android:gravity="center"
-            android:textColor="#7C1616"/>
-
+            android:textColor="#A51E1E"/>
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:background="#464545"
+            android:layout_below="@+id/welcome_text"
+            android:id="@+id/line"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/recycle_view"
-            android:layout_below="@+id/welcome_text"/>
+            android:layout_below="@+id/line"/>
 
 <!--        <Button-->
 <!--            android:layout_width="match_parent"-->

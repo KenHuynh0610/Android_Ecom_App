@@ -12,6 +12,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.myapplication.R
+import com.example.myapplication.adapters.OnClickListener
 import com.example.myapplication.adapters.OrderAdapter
 import com.example.myapplication.app.Endpoints
 import com.example.myapplication.helpers.SessionManager
@@ -20,7 +21,7 @@ import com.example.myapplication.models.OrderResponse
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_order.*
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
@@ -28,12 +29,12 @@ class OrderActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        var dividerDec = DividerItemDecoration(this, VERTICAL)
+
         var sessionManager = SessionManager(this)
         var orderAdapter = OrderAdapter(this)
         recycler_view_order.adapter = orderAdapter
         recycler_view_order.layoutManager = LinearLayoutManager(this)
-        recycler_view_order.addItemDecoration(dividerDec)
+
 
         //TODO: call for order API, implement UI and adapter UI, connect to recycler view adapter, add progress bar
         var queue = Volley.newRequestQueue(this)
@@ -41,6 +42,7 @@ class OrderActivity : AppCompatActivity() {
             Request.Method.GET,
             Endpoints.getOrder(sessionManager.getUserId()),
             Response.Listener{
+                Log.d("abc","${Endpoints.getOrder(sessionManager.getUserId())}")
                 var gson = Gson()
                 var response = gson.fromJson(it, OrderResponse::class.java)
                 for(i in response.data) {
@@ -56,4 +58,8 @@ class OrderActivity : AppCompatActivity() {
 
 
         }
+
+    override fun onClick() {
+
     }
+}

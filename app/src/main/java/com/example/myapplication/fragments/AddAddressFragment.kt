@@ -15,6 +15,7 @@ import com.example.myapplication.R
 import com.example.myapplication.app.Endpoints
 import com.example.myapplication.helpers.SessionManager
 import com.example.myapplication.models.Address
+import com.example.myapplication.models.AddressData
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_address.*
 import kotlinx.android.synthetic.main.activity_address.view.*
@@ -55,34 +56,33 @@ class AddAddressFragment : Fragment() {
 
         view.add_button.setOnClickListener {
 
-//            var queue = Volley.newRequestQueue(activity!!)
-//            var houseNo = view.edit_text_house.text.toString()
-//            var streetNo = view.edit_text_street.text.toString()
-//            var type = view.edit_text_type.text.toString()
-//            var city = view.edit_text_city.text.toString()
-//            var zip = view.edit_text_zip.text.toString().toInt()
-//            var sessionManager = SessionManager(activity!!)
-//            var userId = sessionManager.getUserId()
-//            Log.d("abc", "$userId")
-//
-//            var address = Address(houseNo, streetNo, type, city, zip, userId)
-//            var gson = Gson().toJson(address, Address::class.java)
-//            var params = JSONObject(gson)
-//            var request = JsonObjectRequest(
-//                Request.Method.POST,
-//                Endpoints.postAddress(),
-//                params,
-//                Response.Listener {
+            var queue = Volley.newRequestQueue(activity!!)
+            var houseNo = view.edit_text_house.text.toString()
+            var streetNo = view.edit_text_street.text.toString()
+            var type = view.edit_text_type.text.toString()
+            var city = view.edit_text_city.text.toString()
+            var zip = view.edit_text_zip.text.toString().toInt()
+            var sessionManager = SessionManager(activity!!)
+            var userId = sessionManager.getUserId()
+            Log.d("abc", "$userId")
+
+            var address = AddressData(null, null, city, houseNo, zip, streetNo, type, userId)
+            var gson = Gson().toJson(address, AddressData::class.java)
+            var params = JSONObject(gson)
+            var request = JsonObjectRequest(
+                Request.Method.POST,
+                Endpoints.postAddress(),
+                params,
+                Response.Listener {
 //                    Toast.makeText(activity!!, "Address Posted!", Toast.LENGTH_LONG).show()
-//
-//                },
-//                Response.ErrorListener {
-//                    var str = String(it.networkResponse.data)
-//                    view.status.text = str
-//                }
-//
-//            )
-//            queue.add(request)
+                },
+                Response.ErrorListener {
+                    var str = String(it.networkResponse.data)
+                    view.status.text = str
+                }
+
+            )
+            queue.add(request)
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.frame_layout, SelectAddressFragment()).commit()
 
 

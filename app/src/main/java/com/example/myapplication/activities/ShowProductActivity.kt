@@ -95,6 +95,8 @@ class ShowProductActivity : AppCompatActivity() {
             }
         }
 
+
+
     }
 
     private fun calculation(product: ProductData){
@@ -158,7 +160,9 @@ class ShowProductActivity : AppCompatActivity() {
         }
         textViewCartCount?.setOnClickListener{
             startActivity(Intent(this, CartActivity::class.java))
+
         }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.activities.OrderActivity
 import com.example.myapplication.app.Config
 import com.example.myapplication.models.OrderPost
 import com.example.myapplication.models.ProductSummary
@@ -17,8 +18,8 @@ import kotlinx.android.synthetic.main.row_product_layout.view.product_name
 
 class OrderAdapter(var context: Context) : RecyclerView.Adapter<OrderAdapter.MyViewHolder>()  {
 
-var array: ArrayList<ProductSummary> = ArrayList()
-
+    var array: ArrayList<ProductSummary> = ArrayList()
+    var listener: OnClickListener = context as OrderActivity
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.row_order_layout, parent, false)
 
@@ -46,7 +47,16 @@ var array: ArrayList<ProductSummary> = ArrayList()
                 .into(itemView.product_image)
             itemView.product_name.text = order.productName
             itemView.order_quantity.text = "Quantity: ${order.quantity.toString()}"
+            itemView.order_price.text = "$${order.quantity * order.price}"
+
+            itemView.button_buyagain.setOnClickListener{
+                listener.onClick()
+            }
         }
 
     }
+}
+
+interface OnClickListener {
+    fun onClick()
 }

@@ -47,6 +47,9 @@ class SplashActivity : AppCompatActivity() {
             },
             Response.ErrorListener{
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+
+//                var errorShow= String(it.networkResponse.data)
+//                error.text = errorShow
             }
         )
         requestQueue.add(request)

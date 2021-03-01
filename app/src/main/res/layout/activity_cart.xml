@@ -1,18 +1,100 @@
+<com.amar.library.ui.StickyScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:stickyHeader="@id/button_layout">
+
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <include layout="@layout/app_toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_product_des"
+        android:background="@drawable/background_text"
+        android:backgroundTint="#EAE9E9"
+        android:layout_marginTop="5dp"
+        android:padding="16dp"
+        android:id="@+id/price_layout">
 
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You Save:"
+            android:textSize="20dp"
+            android:id="@+id/text_view_for_quantity"
+            android:textColor="#101010"
+            android:textStyle="italic"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal:"
+            android:textSize="20dp"
+            android:layout_below="@id/text_view_for_quantity"
+            android:id="@+id/text_view_for_price"
+            android:textColor="#131212"
+            android:textStyle="italic"
+            />
+
+
+
+        <TextView
+            android:id="@+id/text_view_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#100F0F"
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"
+            android:textStyle="italic"
+            android:text="4"
+            />
+
+        <TextView
+            android:id="@+id/text_view_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_save"
+            android:layout_alignParentRight="true"
+            android:textColor="#131212"
+            android:text="$180"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_layout"
+        android:gravity="center">
+        <Button
+            android:id="@+id/checkout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#842B2B"
+            android:text="Proceed to Checkout"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#842B2B"
+            android:text="Login to Checkout"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#7C7C7C"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -20,33 +102,9 @@
             android:id="@+id/cart_recycle_view"
             android:layout_marginBottom="5dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:text="Sub Total:"
-            android:id="@+id/text_view_mrp_total"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:text="Discount:"
-            android:id="@+id/text_view_save"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            android:text="Order Amount: "
-            android:id="@+id/text_view_price"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#8E1F1F"
-            android:text="Check Out"
-            android:id="@+id/checkout_button"/>
+
+
     </LinearLayout>
-</ScrollView>
+
 </LinearLayout>
+</com.amar.library.ui.StickyScrollView>

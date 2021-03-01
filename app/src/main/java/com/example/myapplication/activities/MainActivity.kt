@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.adapters.CategoryAdapter
+import com.example.myapplication.helpers.DBHelpers
 import com.example.myapplication.helpers.SessionManager
 import com.example.myapplication.models.Data
 import com.example.myapplication.models.Data.Companion.KEY_CAT
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawer_layout: DrawerLayout
     lateinit var nav_view: NavigationView
     lateinit var sessionManager:SessionManager
-
+    lateinit var dbHelpers: DBHelpers
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun init() {
         setupToolbar()
+        dbHelpers = DBHelpers(this)
         nav_view = navView
 //        var headerView = nav_view.getHeaderView(0)
         sessionManager = SessionManager(this)
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        welcome_text.text = "Welcome ${sessionManager.getUser()}"
+//        welcome_text.text = "Welcome ${sessionManager.getUser()}"
         adapter = CategoryAdapter(this)
         getData()
 
@@ -107,6 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
            R.id.item_logout ->  {
                sessionManager.logout()
                startActivity(Intent(this, LoginActivity::class.java))
+               dbHelpers.deleteAll()
            }
            R.id.item_login -> startActivity(Intent(this, LoginActivity::class.java))
            R.id.item_register -> startActivity(Intent(this, RegisterActivity::class.java))

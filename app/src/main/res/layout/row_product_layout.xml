@@ -2,7 +2,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:autofit="http://schemas.android.com/tools"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     app:cardElevation="7dp"
     app:cardCornerRadius="7dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -19,73 +19,121 @@
         android:layout_marginRight="10dp"
         app:srcCompat="@drawable/ic_launcher_background"/>
 
-    <TextView
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/product_layout"
+        android:layout_toRightOf="@id/product_image"
+        android:id="@+id/price_layout_product">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:id="@+id/product_mrp"
+            android:text="$100"
+        android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textColor="#C91D1D"
+            android:text="-$20"
+            android:id="@+id/product_discounnt"/>
+
+        <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_layout"
-        android:layout_toRightOf="@id/product_image"
         android:textColor="#C91D1D"
         android:text="$80"
-        android:textSize="20dp" />
+        android:textSize="15dp" />
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textAllCaps="false"
+        android:text="Save for Later"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:layout_below="@id/product_image"
+        android:id="@+id/save_for_later_button"
+        android:backgroundTint="#6E1F1F"
+       />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_below="@+id/price"
+        android:layout_below="@+id/price_layout_product"
         android:layout_alignParentRight="true"
-        android:id="@+id/layout_button">
+        android:id="@+id/layout_button_product">
 
         <Button
-            android:id="@+id/button_decrement"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/button_decrement_product"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="3sp"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white"
             android:backgroundTint="#6E1F1F"
-            android:textSize="15sp" />
+            android:textSize="10sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_margin="3sp"
-            android:id="@+id/text_view_quantity"/>
+            android:id="@+id/text_view_quantity_product"/>
 
         <Button
-            android:id="@+id/button_increment"
-            android:layout_width="40sp"
-            android:layout_height="40dp"
+            android:id="@+id/button_increment_product"
+            android:layout_width="35sp"
+            android:layout_height="35dp"
             android:layout_margin="3sp"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:text="+"
             android:backgroundTint="#6E1F1F"
-            android:textSize="15dp" />
+            android:textSize="10dp" />
     </LinearLayout>
 
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Add"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="#6E1F1F"
+        android:id="@+id/add_product_to_cart"
+        android:layout_below="@id/price_layout_product"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/product_layout"
         android:layout_toRightOf="@id/product_image"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
+
         <me.grantland.widget.AutofitLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/product_name"
             android:text="Chicken nugget with 500 grams of sugar and another gram of "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:maxLines="2"
             autofit:minTextSize="16sp"
             />

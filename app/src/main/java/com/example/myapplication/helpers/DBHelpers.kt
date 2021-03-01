@@ -20,6 +20,7 @@ class DBHelpers(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
         private const val COLUMN_PRICE = "price"
         private const val COLUMN_IMAGE = "image_path"
         private const val COLUMN_MRP  = "mrp"
+        private const val COLUMN_SAVE = "save"
         const val SQL_CREATE_TABLE =
             "create table $TABLE_NAME($COLUMN_ID char(100) primary key, $COLUMN_PRODUCT char(50), $COLUMN_IMAGE char(100), $COLUMN_QUANTITY integer, $COLUMN_PRICE integer, $COLUMN_MRP integer)"
     }
@@ -58,11 +59,48 @@ class DBHelpers(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
         }
     }
 
+
+    fun getSaveforLater(): ArrayList<ShowProduct> {
+        var db = readableDatabase
+        var productList: ArrayList<ShowProduct> = ArrayList()
+        var target = "yes"
+        var columns = arrayOf(
+            COLUMN_ID,
+            COLUMN_PRODUCT,
+            COLUMN_QUANTITY,
+            COLUMN_PRICE,
+            COLUMN_IMAGE,
+            COLUMN_MRP
+        )
+
+        var selection = "$COLUMN_SAVE = ?"
+        var selectionArgs = arrayOf(target)
+        var cursor = db.query(TABLE_NAME, columns, selection, selectionArgs, null, null, null, null)
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                var productId = cursor.getString(cursor.getColumnIndex(COLUMN_ID))
+                var product = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT))
+                var price = cursor.getInt(cursor.getColumnIndex(COLUMN_PRICE))
+                var quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY))
+                var image = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE))
+                var mrp = cursor.getInt(cursor.getColumnIndex(COLUMN_MRP))
+                var products = ShowProduct(productId, product, price, quantity, image, mrp)
+                productList.add(products)
+            } while (cursor.moveToNext())
+        }
+        return productList
+    }
+
+
+
     fun deleteItem(productName: String){
         var db = writableDatabase
         var whereClause = "$COLUMN_PRODUCT = ?"
         var whereArgs = arrayOf(productName)
         db.delete(TABLE_NAME, whereClause, whereArgs)
+
+
     }
 
     fun getAllProduct(): ArrayList<ShowProduct> {
@@ -116,15 +154,7 @@ class DBHelpers(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
         return 0
     }
 
-//    fun getTotalPrice(): Int
-//    {
-//        var db = readableDatabase
-//        val temp_column= arrayOf("sum($COLUMN_PRICE)")
-//        var cursor = db.query(TABLE_NAME, temp_column, null, null, null, null, null)
-//        if (cursor != null &&cursor.moveToFirst())
-//            return cursor.getInt(cursor.getColumnIndex("sum($COLUMN_PRICE)"))
-//        return 0
-//    }
+
 
 
     fun updateQuantity(name: String, quantity: Int) {

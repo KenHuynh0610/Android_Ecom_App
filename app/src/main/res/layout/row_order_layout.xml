@@ -1,8 +1,18 @@
+<androidx.cardview.widget.CardView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:autofit="http://schemas.android.com/tools"
+    android:layout_margin="5dp"
+    app:cardElevation="7dp"
+    app:cardCornerRadius="7dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/product_image"
@@ -15,38 +25,57 @@
         android:id="@+id/order_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/product_image"
+        android:layout_below="@+id/product_layout"
+        android:layout_toRightOf="@id/product_image"
         android:textColor="#C91D1D"
         android:text="quantity: 4"
         android:textSize="20dp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/order_quantity"
+        android:layout_toRightOf="@id/product_image"
+        android:text="$80"
+        android:id="@+id/order_price"
+        android:textSize="20dp"
+        android:textColor="#C91D1D"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buy Again"
         android:backgroundTint="#A71434"
         android:layout_alignParentRight="true"
-        android:id="@+id/button_modify_order"
+        android:id="@+id/button_buyagain"
         android:textAllCaps="false"
         android:textSize="10dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_below="@id/order_price"
+        />
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/price"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/product_image"
+        android:id="@+id/product_layout"
         android:orientation="vertical">
 
+        <me.grantland.widget.AutofitLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20dp"
+            android:maxLines="2"
             android:text="chicken nugget mixed with some mayonaise and cheese"
             android:layout_marginTop="15dp"/>
-
+        </me.grantland.widget.AutofitLayout>
     </LinearLayout>
 </RelativeLayout>
+</androidx.cardview.widget.CardView>

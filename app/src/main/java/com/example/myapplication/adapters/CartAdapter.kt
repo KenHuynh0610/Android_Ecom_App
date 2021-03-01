@@ -60,10 +60,11 @@ class CartAdapter(var context: Context, var array: ArrayList<ShowProduct>) :
             itemView.button_increment.setOnClickListener {
                 if (db.exists(product.name)) {
                     product.quantity++
-                    db.updateQuantity(product.name, product.quantity)
-                    itemView.text_view_quantity.text = product.quantity.toString()
-                    itemView.price.text = "$${product.quantity * product.price}"
-                    listener?.onClick()
+//                    db.updateQuantity(product.name, product.quantity)
+//                    itemView.text_view_quantity.text = product.quantity.toString()
+//                    itemView.price.text = "$${product.quantity * product.price}"
+//                    listener?.onClick()
+                    updateAndDisplay(product)
                     notifyDataSetChanged()
                 }
             }
